@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="text" placeholder="Your name" v-model="person.name"><br>
+        <input type="text" placeholder="Your surname" v-model="person.surname"><br>
+        <input type="number" placeholder="Your age" v-model="person.age"><br>
+        <input type="radio" id="male" value="male" v-model="person.gender">
+        <label for="male">Male</label>
+        <br>
+        <input type="radio" id="female" value="female" v-model="person.gender">
+        <label for="female">Female</label>
+        <br>
+        <input type="checkbox" id="dog" value="dog" v-model="person.pets">
+        <label for="dog">Dog</label>
+        <input type="checkbox" id="cat" value="cat" v-model="person.pets">
+        <label for="cat">Cat</label>
+        <input type="checkbox" id="bird" value="bird" v-model="person.pets">
+        <label for="bird">Bird</label>
+        <br>
+        <select v-model="person.role">
+            <option value="" disabled>Select role</option>
+            <option value="admin">Admin</option>
+            <option value="user">User</option>
+        </select>
+        <br>
+        <span> {{ person }} </span>
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                person: {
+                    name: '',
+                    surname: '',
+                    age: '',
+                    gender: '',
+                    pets: [],
+                    role: '',
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+</head>
+<body>
+    <div id="app">
+        <div>{{result}} {{count}} times</div>
+        <bomb-button :is-bomb="false" @bomb="bomb" @click="clickBomb"></bomb-button>
+        <bomb-button :is-bomb="true" @bomb="bomb" @click="clickBomb"></bomb-button>
+        <bomb-button :is-bomb="false" @bomb="bomb" @click="clickBomb"></bomb-button><br>
+        <bomb-button :is-bomb="true" @bomb="bomb" @click="clickBomb"></bomb-button>
+        <bomb-button :is-bomb="false" @bomb="bomb" @click="clickBomb"></bomb-button>
+        <bomb-button :is-bomb="true" @bomb="bomb" @click="clickBomb"></bomb-button><br>
+        <bomb-button :is-bomb="false" @bomb="bomb" @click="clickBomb"></bomb-button>
+        <bomb-button :is-bomb="true" @bomb="bomb" @click="clickBomb"></bomb-button>
+        <bomb-button :is-bomb="false" @bomb="bomb" @click="clickBomb"></bomb-button><br>
+    </div>
+    <script type="text/x-template" id="bomb-button">
+        <button @click="open" style="width:25px;height:25px">{{value}}</button>
+    </script>
+    <script>
+        Vue.component('bomb-button',{
+            props:{
+                isBomb:Boolean
+            },
+            data: function(){
+                return{
+                    value:'-',
+                    clicked:false
+                };
+            },
+            methods:{
+                open:function(){
+                    if(this.clicked) return; 
+                    this.clicked = true;
+                    
+                    this.$emit('click');
+                    if(!this.isBomb) return;
+                    this.value = "*";
+                    this.$emit('bomb');
+                }
+            },
+            template:'#bomb-button'
+        });
+        var app = new Vue({
+            el:'#app',
+            data:{
+                result:'',
+                count:0
+            },
+            methods: {
+                bomb:function(){
+                    this.result="You lose !!!";
+                },
+                clickBomb:function(){
+                    this.count++;
+                },
+            },
+        });
+    </script>
+</body>
+</html>
